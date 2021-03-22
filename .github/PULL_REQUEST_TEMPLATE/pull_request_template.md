@@ -8,5 +8,5 @@
 <!--- If it fixes an open issue, please link to the issue here. -->
 
 ## Web checklist
-- [ ] sa
+- [ ] 
 - [ ] 
