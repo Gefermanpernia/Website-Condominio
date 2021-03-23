@@ -156,5 +156,5 @@ docs(guide): se actualizan documentos de Google Docs (#35)
 
 ## 8.- Ultima Revision
 
-**Oscar Daniel Perez** - _odprz.dev@gmail.com_ - [@odprz-dev](https://github.com/odprz-dev) - 14-02-2021
+**Geferman Pernia** - _Geferman.pro@gmail.com_ - [@Gefermanpernia](https://github.com/Gefermanpernia) - 23-03-2021
 
