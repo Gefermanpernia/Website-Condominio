@@ -17,10 +17,8 @@ namespace Backend_Condominio
         {
             base.OnModelCreating(builder);
             builder.Entity<Invoice>().HasKey(x => new { x.UserId, x.ActivityId });
-            builder.Entity<Commentary>().HasKey(x => new { x.UserId, x.CoversationTopicId });
             builder.Entity<Notification>().HasKey(x => new { x.UserId, x.NotificationTypeId });
             builder.Entity<Payment>().HasKey(x => new { x.InvoiceId, x.TypePaymentId });
-            builder.Entity<ResidenceData>().HasKey(x => new { x.UserId, x.Id });
         }
 
         public DbSet<Activity> Activities { get; set; }
@@ -34,7 +32,6 @@ namespace Backend_Condominio
         public DbSet<ResidenceData> ResidenceDatas { get; set; }
         public DbSet<Service> ServicesT { get; set; }
         public DbSet<ServiceStatus> ServiceStatuses { get; set; }
-        public DbSet<User> Users { get; set; }
 
     }
 }
