@@ -2,6 +2,7 @@
 
 using Backend_Condominio.DTOs;
 using Backend_Condominio.Entities;
+using Backend_Condominio.Helpers;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -29,6 +30,8 @@ namespace Backend_Condominio.Repositories
         public virtual Task<List<TEntity>> GetAllPaginated(TFilter filter)
         {
             var queryable = applicationDbContext.Set<TEntity>().AsQueryable();
+
+            queryable = queryable.Paginate(filter);
 
             return queryable.ToListAsync();
 
