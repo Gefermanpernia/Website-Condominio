@@ -12,6 +12,11 @@ namespace Backend_Condominio.Utilities
             // ---------------------------------------------TypePayments------------------------------------------
             CreateMap<TypePaymentCreationDTO, TypePayment>();
             CreateMap<TypePayment, TypePaymentDTO>().ReverseMap();
+            //==========================TypeNotification===============//
+            CreateMap<TypeNotificationCreationDTO, NotificationType>();
+            CreateMap<NotificationType, TypeNotificationDTO>().ReverseMap();
+
+
         }
     }
 }
