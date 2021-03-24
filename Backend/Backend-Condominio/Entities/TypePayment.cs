@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Backend_Condominio.Entities
 {
-    public class TypePayment
+    public class TypePayment:ITKey<int>
     {
         public int Id { get; set; }
 
