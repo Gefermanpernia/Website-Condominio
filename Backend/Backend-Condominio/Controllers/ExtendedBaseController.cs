@@ -39,20 +39,32 @@ namespace Backend_Condominio.Controllers
         }
 
         [HttpGet]
-        public virtual async Task<ActionResult<List<TEntity>>> Get(TFilter filter)
+        public virtual async Task<ActionResult<List<TDTO>>> Get([FromQuery]TFilter filter)
         {
+            List<TEntity> entities;
             if (filter != null)
             {
-                return await repository.GetAllPaginated(filter);
+                entities = await repository.GetAllPaginated(filter);
+            }
+            else
+            {
+                entities =  await repository.GetAll();
             }
 
-            return await repository.GetAll();
+            return mapper.Map<List<TDTO>>(entities);
         } 
 
         [HttpGet("{Id}")]
-        public virtual async Task<ActionResult<TEntity>> Get(TValue Id)
+        public virtual async Task<ActionResult<TDTO>> Get(TValue Id)
         {
-            return await repository.Get(Id);
+            var entity =  await repository.Get(Id);
+
+            if(entity == null)
+            {
+                return NotFound();
+            }
+
+            return mapper.Map<TDTO>(entity);
         }
 
         [HttpPost]

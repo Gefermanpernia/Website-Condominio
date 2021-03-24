@@ -14,7 +14,7 @@ namespace Backend_Condominio.Repositories
     public class BaseRepository<TEntity, TValue, TFilter,TEntityUpdate>
         where TEntity : class, ITKey<TValue>
         where TEntityUpdate:class
-        where TFilter : PaginationDTO
+        where TFilter :PaginationDTO
     {
         private readonly ApplicationDbContext applicationDbContext;
         private readonly IMapper mapper;
@@ -58,7 +58,7 @@ namespace Backend_Condominio.Repositories
         public virtual async Task<bool> Update(TValue id,TEntityUpdate entityUpdate )
         {
             var entity = await applicationDbContext.Set<TEntity>().FirstOrDefaultAsync(e => e.Id.Equals(id));
-
+                                                                                                   
 
             if(entity == null)
             {

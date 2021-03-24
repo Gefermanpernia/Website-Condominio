@@ -1,4 +1,5 @@
 using Backend_Condominio.Entities;
+using Backend_Condominio.Repositories;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -60,6 +61,9 @@ namespace Backend_Condominio
 
             services
                 .AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("default")));
+
+            services.AddScoped<TypePaymentRepository>();
+
             services
                 .AddAutoMapper(typeof(Startup));
 
