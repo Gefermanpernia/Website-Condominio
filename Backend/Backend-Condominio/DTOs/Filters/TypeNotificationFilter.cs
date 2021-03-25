@@ -8,6 +8,6 @@ namespace Backend_Condominio.DTOs.Filters
     public class TypeNotificationFilter : PaginationDTO
     {
 
-        public string name { get; set; }
+        public string Name { get; set; }
     }
 }
