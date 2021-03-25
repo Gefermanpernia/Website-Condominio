@@ -93,6 +93,27 @@ namespace Backend_Condominio.Controllers
             };
         }
 
-        
+        [HttpPost("login")]
+        public async Task<ActionResult<TokenResponse>> Login(LoginDTO loginDTO)
+        {
+            var user = await userManager.FindByEmailAsync(loginDTO.Email);
+            if (user != null)
+            {
+               var result = await signInManager.PasswordSignInAsync(user, loginDTO.Password, false, true);
+                if (result.Succeeded)
+                {
+                        return await BuildLoginToken(user);
+                }
+                if (result.IsLockedOut)
+                {
+                    if (user.LockoutEnd.HasValue)
+                    {
+                        var remaintime = user.LockoutEnd - DateTime.Now;
+                        return BadRequest($"Espere { remaintime.Value.TotalMinutes:N2)} minutos");
+                    }
+                }
+            }
+            return BadRequest("Credenciales invalidas");
+        }
     }
 }
