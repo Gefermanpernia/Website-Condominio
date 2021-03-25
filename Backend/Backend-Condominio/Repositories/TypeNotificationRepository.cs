@@ -28,9 +28,9 @@ namespace Backend_Condominio.Repositories
             var queryable = DbContext.NotificationTypes.AsQueryable();
             if (filter!=null)
             {
-                if (!string.IsNullOrEmpty(filter.name))
+                if (!string.IsNullOrEmpty(filter.Name))
                 {
-                    queryable = queryable.Where(x => x.Name.Contains(filter.name));
+                    queryable = queryable.Where(x => x.Name.Contains(filter.Name));
                 }
                 queryable = queryable.Paginate(filter);
 
