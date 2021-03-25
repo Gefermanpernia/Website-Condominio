@@ -10,6 +10,5 @@ namespace Backend_Condominio.Entities
         public string FullName { get; set; }
         public List<ResidenceData> ResidenceDatas { get; set; }
 
-
     }
 }
