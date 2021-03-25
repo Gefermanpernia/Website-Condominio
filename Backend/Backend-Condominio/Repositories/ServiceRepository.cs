@@ -13,18 +13,17 @@ namespace Backend_Condominio.Repositories
 {
     public class ServiceRepository : BaseRepository<Service, int, ServiceFilter, ServiceCreationDTO>
     {
-        private readonly ApplicationDbContext applicationDbContext;
-        private readonly IMapper mapper;
+        private ApplicationDbContext DbContext;
 
         public ServiceRepository(ApplicationDbContext applicationDbContext, IMapper mapper) : base(applicationDbContext, mapper)
         {
-            this.applicationDbContext = applicationDbContext;
-            this.mapper = mapper;
+            this.DbContext = applicationDbContext;
+    
         }
 
         public override async Task<List<Service>> GetAllPaginated(ServiceFilter filter)
         {
-            var queryable = applicationDbContext.ServicesT.AsQueryable();
+            var queryable = DbContext.ServicesT.AsQueryable();
             if (filter!=null)
             {
                 if (!string.IsNullOrEmpty(filter.Name))

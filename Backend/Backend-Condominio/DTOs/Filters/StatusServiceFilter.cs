@@ -1,20 +1,16 @@
-﻿using System;
+﻿using Backend_Condominio.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Backend_Condominio.Entities
+namespace Backend_Condominio.DTOs.Filters
 {
-    public class ServiceStatus : ITKey<int>
+    public class StatusServiceFilter : PaginationDTO
     {
-        public int Id { get; set; }
-
         public string Title { get; set; }
-        
-        public string Text { get; set; }
 
         public List<Service> Services { get; set; }
-
 
     }
 }

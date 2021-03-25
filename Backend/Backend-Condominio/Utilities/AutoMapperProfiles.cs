@@ -25,9 +25,10 @@ namespace Backend_Condominio.Utilities
             CreateMap<ServiceCreationDTO, Service>();
             CreateMap<Service, ServiceDTO>().ReverseMap();
             // =========================================================
-            //                      Services Status
+            //                      Statu Service 
             // ========================================================= 
-
+            CreateMap<StatusServiceCreationDTO, ServiceStatus>();
+            CreateMap<ServiceStatus, StatusServiceDTO>().ReverseMap();
             // =========================================================
             //                      Payment
             // ========================================================= 

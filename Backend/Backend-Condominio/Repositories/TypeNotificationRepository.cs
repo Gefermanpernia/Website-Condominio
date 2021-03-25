@@ -16,12 +16,10 @@ namespace Backend_Condominio.Repositories
         public TypeNotificationRepository(ApplicationDbContext
             applicationDbContext, IMapper mapper) : base(applicationDbContext, mapper)
         {
-            Mapper = mapper;
             DbContext = applicationDbContext;
         }
 
-        public IMapper Mapper { get; }
-        public ApplicationDbContext DbContext { get; }
+        private ApplicationDbContext DbContext { get; }
 
         public async override Task<List<NotificationType>> GetAllPaginated(TypeNotificationFilter filter)
         {
