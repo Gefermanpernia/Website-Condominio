@@ -68,7 +68,7 @@ namespace Backend_Condominio
             services.AddScoped<TypeNotificationRepository>();
             services.AddScoped<ServiceRepository>();
             services.AddScoped<StatusServiceRepository>();
-
+            services.AddScoped<ActivityRepository>();
 
             services
                 .AddAutoMapper(typeof(Startup));
