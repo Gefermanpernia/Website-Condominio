@@ -11,8 +11,7 @@ namespace Backend_Condominio.Entities
 
         public string Name { get; set; }
 
-        public int ServicesStatusId { get; set; }
-
+        public int? ServiceStatusId { get; set; }
         public ServiceStatus ServiceStatus { get; set; }
 
     }
