@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Backend_Condominio.Repositories
 {
-    public class InvoiceRepository : BaseRepository<Invoice, int, InvoiceFilter, InvoiceCreationDTO>
+    public class InvoiceRepository : BaseRepository<Invoice, string, InvoiceFilter, InvoiceCreationDTO>
     {
         private readonly ApplicationDbContext dbContext;
 
