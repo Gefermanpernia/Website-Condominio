@@ -61,9 +61,14 @@ namespace Backend_Condominio
 
             services
                 .AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("default")));
-
+            // =========================================================
+            //                      Repositories
+            // =========================================================
             services.AddScoped<TypePaymentRepository>();
             services.AddScoped<TypeNotificationRepository>();
+            services.AddScoped<ServiceRepository>();
+            services.AddScoped<StatusServiceRepository>();
+
 
             services
                 .AddAutoMapper(typeof(Startup));

@@ -9,14 +9,37 @@ namespace Backend_Condominio.Utilities
     {
         public AutoMapperProfiles()
         {
-            // ---------------------------------------------TypePayments------------------------------------------
+            // =========================================================
+            //                      Type Payment
+            // =========================================================            
             CreateMap<TypePaymentCreationDTO, TypePayment>();
             CreateMap<TypePayment, TypePaymentDTO>().ReverseMap();
-            //==========================TypeNotification===============//
+            // =========================================================
+            //                      Type Notification
+            // =========================================================
             CreateMap<TypeNotificationCreationDTO, NotificationType>();
             CreateMap<NotificationType, TypeNotificationDTO>().ReverseMap();
+            // =========================================================
+            //                      Service
+            // ========================================================= 
+            CreateMap<ServiceCreationDTO, Service>();
+            CreateMap<Service, ServiceDTO>().ReverseMap();
+            // =========================================================
+            //                      Statu Service 
+            // ========================================================= 
+            CreateMap<StatusServiceCreationDTO, ServiceStatus>();
+            CreateMap<ServiceStatus, StatusServiceDTO>().ReverseMap();
+            // =========================================================
+            //                      Payment
+            // ========================================================= 
 
+            // =========================================================
+            //                      Activity
+            // ========================================================= 
 
+            // =========================================================
+            //                      Commentary
+            // ========================================================= 
         }
     }
 }

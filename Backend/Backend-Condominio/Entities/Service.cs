@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Backend_Condominio.Entities
 {
-    public class Service
+    public class Service : ITKey<int>
     {
         public int Id { get; set; }
 
