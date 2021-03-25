@@ -19,6 +19,11 @@ namespace Backend_Condominio
             builder.Entity<Invoice>().HasKey(x => new { x.UserId, x.ActivityId });
             builder.Entity<Notification>().HasKey(x => new { x.UserId, x.NotificationTypeId });
             builder.Entity<Payment>().HasKey(x => new { x.InvoiceId, x.TypePaymentId });
+
+            builder.Entity<Service>()
+                .HasOne(x => x.ServiceStatus)
+                .WithMany(x => x.Services)
+                .OnDelete(DeleteBehavior.SetNull);
         }
 
         public DbSet<Activity> Activities { get; set; }
