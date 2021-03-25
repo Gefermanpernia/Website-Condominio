@@ -12,7 +12,7 @@ namespace Backend_Condominio.DTOs
         [Required]
         public string Name { get; set; }
         [Required]
-        public int ServicesStatusId { get; set; }
+        public int ServiceStatusId { get; set; }
 
     }
 }
