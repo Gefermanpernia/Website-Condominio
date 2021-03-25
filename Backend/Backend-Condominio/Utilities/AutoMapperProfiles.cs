@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 
 using Backend_Condominio.DTOs;
+using Backend_Condominio.DTOs.Activity;
 using Backend_Condominio.Entities;
 
 namespace Backend_Condominio.Utilities
@@ -36,7 +37,8 @@ namespace Backend_Condominio.Utilities
             // =========================================================
             //                      Activity
             // ========================================================= 
-
+            CreateMap<ActivityCreationDTO, Activity>();
+            CreateMap<Activity, ActivityDTO>().ReverseMap();
             // =========================================================
             //                      Commentary
             // ========================================================= 
