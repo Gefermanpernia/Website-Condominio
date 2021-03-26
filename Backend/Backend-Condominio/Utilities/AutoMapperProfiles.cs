@@ -2,6 +2,7 @@
 
 using Backend_Condominio.DTOs;
 using Backend_Condominio.DTOs.Activity;
+using Backend_Condominio.DTOs.Notification;
 using Backend_Condominio.Entities;
 
 namespace Backend_Condominio.Utilities
@@ -41,7 +42,19 @@ namespace Backend_Condominio.Utilities
             CreateMap<Activity, ActivityDTO>().ReverseMap();
             // =========================================================
             //                      Commentary
+            // =========================================================
+            // 
+
+            // =========================================================
+            //                      Notifications
             // ========================================================= 
+
+            CreateMap<NotificationCreationDTO, Notification>();
+            CreateMap<NotificationForGroupDTO, Notification>();
+
+            CreateMap<Notification, NotificationDTO>()
+                .ForMember(m => m.NotificationTypeName, options => options.MapFrom(n => n.NotificationType.Name))
+                .ReverseMap();
         }
     }
 }
