@@ -1,8 +1,13 @@
 ﻿using AutoMapper;
 
 using Backend_Condominio.DTOs;
+
+using Backend_Condominio.DTOs.Activity;
+using Backend_Condominio.DTOs.Notification;
+
 using Backend_Condominio.DTOs.Activities;
 using Backend_Condominio.DTOs.Invoice;
+
 using Backend_Condominio.Entities;
 
 namespace Backend_Condominio.Utilities
@@ -47,7 +52,19 @@ namespace Backend_Condominio.Utilities
             CreateMap<Invoice, InvoiceDTO>().ReverseMap();
             // =========================================================
             //                      Commentary
+            // =========================================================
+            // 
+
+            // =========================================================
+            //                      Notifications
             // ========================================================= 
+
+            CreateMap<NotificationCreationDTO, Notification>();
+            CreateMap<NotificationForGroupDTO, Notification>();
+
+            CreateMap<Notification, NotificationDTO>()
+                .ForMember(m => m.NotificationTypeName, options => options.MapFrom(n => n.NotificationType.Name))
+                .ReverseMap();
         }
     }
 }

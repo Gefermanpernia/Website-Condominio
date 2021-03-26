@@ -47,7 +47,17 @@ namespace Backend_Condominio
             //------------------Entities configuration----------------------
 
             builder.Entity<Invoice>().HasKey(x => new { x.UserId, x.ActivityId });
-            builder.Entity<Notification>().HasKey(x => new { x.UserId, x.NotificationTypeId });
+            builder.Entity<Notification>().HasKey(x => x.Id);
+            builder.Entity<Notification>()
+                .HasOne(n => n.NotificationType)
+                .WithMany(n => n.Notifications)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Notification>()
+                .HasOne(n => n.User)
+                .WithMany(n => n.Notifications)
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<Payment>().HasKey(x => new { x.InvoiceId, x.TypePaymentId });
 
             builder.Entity<Service>()

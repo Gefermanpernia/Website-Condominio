@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -55,7 +54,7 @@ namespace Backend_Condominio.Controllers
         private async Task<TokenResponse> BuildLoginToken(User user)
         {
 
-            if(user==null)
+            if (user == null)
             {
                 return null;
             }
@@ -66,9 +65,9 @@ namespace Backend_Condominio.Controllers
                 new Claim(ClaimTypes.NameIdentifier,user.Id)
             };
 
-            var roles =await userManager.GetRolesAsync(user);
+            var roles = await userManager.GetRolesAsync(user);
 
-            for(int i = 0; i < roles.Count; i++)
+            for (int i = 0; i < roles.Count; i++)
             {
                 claims.Add(new Claim(ClaimTypes.Role, roles[i]));
             }
@@ -99,10 +98,10 @@ namespace Backend_Condominio.Controllers
             var user = await userManager.FindByEmailAsync(loginDTO.Email);
             if (user != null)
             {
-               var result = await signInManager.PasswordSignInAsync(user, loginDTO.Password, false, true);
+                var result = await signInManager.PasswordSignInAsync(user, loginDTO.Password, false, true);
                 if (result.Succeeded)
                 {
-                        return await BuildLoginToken(user);
+                    return await BuildLoginToken(user);
                 }
                 if (result.IsLockedOut)
                 {
