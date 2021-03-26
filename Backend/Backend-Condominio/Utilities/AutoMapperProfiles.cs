@@ -43,7 +43,7 @@ namespace Backend_Condominio.Utilities
             // =========================================================
             //                      Invoice
             // ========================================================= 
-            CreateMap<InvoiceCreationDTO, Invoice>();
+            CreateMap<InvoiceCreationDTO, Invoice>().ReverseMap();
             CreateMap<Invoice, InvoiceDTO>().ReverseMap();
             // =========================================================
             //                      Commentary

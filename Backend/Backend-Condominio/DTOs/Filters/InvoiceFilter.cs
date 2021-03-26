@@ -2,7 +2,7 @@
 {
     public class InvoiceFilter : PaginationDTO
     {
-        public int ActivityId { get; set; }
+        public int? ActivityId { get; set; }
         public string UserId { get; set; }
 
     }
