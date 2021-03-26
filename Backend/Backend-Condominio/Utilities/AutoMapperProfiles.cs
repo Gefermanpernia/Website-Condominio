@@ -2,7 +2,6 @@
 
 using Backend_Condominio.DTOs;
 
-using Backend_Condominio.DTOs.Activity;
 using Backend_Condominio.DTOs.Notification;
 
 using Backend_Condominio.DTOs.Activities;

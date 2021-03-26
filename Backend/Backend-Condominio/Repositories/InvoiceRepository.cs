@@ -58,10 +58,10 @@ namespace Backend_Condominio.Repositories
             }
             return null;
         }
-        public Task<Invoice> CreateInvoiceForRol(Invoice invoice)
-        {
+        //public Task<Invoice> CreateInvoiceForRol(Invoice invoice)
+        //{
 
-        }
+        //}
         public async Task<bool> UpdateInvoice(InvoiceFilter invoiceFilter, InvoiceCreationDTO invoiceCreationDTO)
         {
             var entity = await dbContext.Invoices.FirstOrDefaultAsync(x => x.ActivityId.Equals(invoiceFilter.ActivityId) && x.UserId.Equals(invoiceFilter.UserId));
