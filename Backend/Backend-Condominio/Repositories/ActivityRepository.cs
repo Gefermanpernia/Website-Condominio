@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
-using Backend_Condominio.DTOs.Activity;
+
+using Backend_Condominio.DTOs.Activities;
 using Backend_Condominio.DTOs.Filters;
 using Backend_Condominio.Entities;
 using Backend_Condominio.Helpers;
+
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
