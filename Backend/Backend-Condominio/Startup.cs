@@ -70,6 +70,11 @@ namespace Backend_Condominio
             services.AddScoped<StatusServiceRepository>();
             services.AddScoped<ActivityRepository>();
 
+            services.AddScoped<NotificationRepository>();
+
+            services.AddScoped<InvoiceRepository>();
+
+
             services
                 .AddAutoMapper(typeof(Startup));
 

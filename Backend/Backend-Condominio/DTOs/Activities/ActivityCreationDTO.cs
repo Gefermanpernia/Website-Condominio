@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Backend_Condominio.DTOs.Activity
+namespace Backend_Condominio.DTOs.Activities
 {
     public class ActivityCreationDTO
     {
