@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Backend_Condominio.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Backend_Condominio.Entities
+namespace Backend_Condominio.DTOs.Invoice
 {
-    public class Invoice
+    public class InvoiceDTO
     {
         public string UserId { get; set; }
 
@@ -17,9 +21,5 @@ namespace Backend_Condominio.Entities
         public bool IsPaid { get; set; }
 
         public List<Payment> Payments { get; set; }
-
-
-
-
     }
 }

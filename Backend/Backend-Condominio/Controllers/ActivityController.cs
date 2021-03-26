@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Backend_Condominio.DTOs.Activity;
+using Backend_Condominio.DTOs.Activities;
 using Backend_Condominio.DTOs.Filters;
 using Backend_Condominio.Entities;
 using Backend_Condominio.Repositories;
