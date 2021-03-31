@@ -48,15 +48,20 @@ namespace Backend_Condominio.Repositories
         {
             return dbContext.Invoices.ToListAsync();
         }
-        public async Task<Invoice> CreateInvoiceForUser(Invoice invoiceCreationDTO)
+
+        public async Task<Invoice> CreateInvoiceForUser(InvoiceCreationDTO invoice)
         {
-            if (!string.IsNullOrEmpty(invoiceCreationDTO.UserId))
+            try
             {
-                dbContext.Add(invoiceCreationDTO);
+                var entity = mapper.Map<Invoice>(invoice);
+                dbContext.Add(entity);
                 await dbContext.SaveChangesAsync();
-                return invoiceCreationDTO;
+                return entity;
             }
-            return null;
+            catch (DbUpdateException)
+            {
+                return null;
+            }
         }
         //public Task<Invoice> CreateInvoiceForRol(Invoice invoice)
         //{
@@ -76,16 +81,22 @@ namespace Backend_Condominio.Repositories
         }
         public async Task<bool> DeleteInvoice(InvoiceFilter invoiceFilter)
         {
-            var queryable = dbContext.Invoices.AsQueryable();
-            queryable = FindIds(invoiceFilter, queryable);
-            var entity = queryable.ToListAsync();
-            if (entity == null)
+            if (invoiceFilter.ActivityId.HasValue && !string.IsNullOrEmpty(invoiceFilter.UserId))
             {
-                return false;
+                var queryable = dbContext.Invoices.AsQueryable();
+                queryable = FindIds(invoiceFilter, queryable);
+                var entity = queryable.ToListAsync();
+                if (entity == null)
+                {
+                    return false;
+                }
+                dbContext.Entry(entity).State = EntityState.Deleted;
+                await dbContext.SaveChangesAsync();
+                return true;
+
             }
-            dbContext.Entry(entity).State = EntityState.Deleted;
-            await dbContext.SaveChangesAsync();
-            return true;
+            return false;
+           
         }
     }
 }
