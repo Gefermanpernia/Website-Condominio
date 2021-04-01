@@ -1,5 +1,7 @@
 ﻿using System;
 
+
+
 namespace Backend_Condominio.DTOs.Payment
 {
     public class PaymentDTO

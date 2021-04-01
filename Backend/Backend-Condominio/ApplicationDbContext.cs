@@ -52,6 +52,8 @@ namespace Backend_Condominio
                 .WithMany(i => i.Invoices)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            builder.Entity<ResidenceData>()
+                .HasKey(x => new { x.Floor , x.ApartmentNumber});
             builder.Entity<Notification>().HasKey(x => x.Id);
             builder.Entity<Notification>()
                 .HasOne(n => n.NotificationType)

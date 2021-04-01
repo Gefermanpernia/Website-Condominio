@@ -8,9 +8,10 @@ namespace Backend_Condominio.Entities
 
         public string Name { get; set; }
 
-        public string Description { get; set; }
 
-        public List<Invoice> Invoices { get; set; }
+        public string Description { get; set; } 
+
+        public List<Invoice> Invoices { get; set; } 
 
     }
 }

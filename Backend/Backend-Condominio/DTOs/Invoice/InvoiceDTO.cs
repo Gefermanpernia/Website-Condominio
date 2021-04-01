@@ -12,7 +12,6 @@ namespace Backend_Condominio.DTOs.Invoice
         public int Id { get; set; }
         public string UserId { get; set; }
 
-        public string RoleName { get; set; }
         public UserDTO User { get; set; }
 
         public int ActivityId { get; set; }

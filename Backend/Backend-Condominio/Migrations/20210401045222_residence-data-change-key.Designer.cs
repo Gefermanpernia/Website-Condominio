@@ -4,14 +4,16 @@ using Backend_Condominio;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Backend_Condominio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210401045222_residence-data-change-key")]
+    partial class residencedatachangekey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -358,27 +360,21 @@ namespace Backend_Condominio.Migrations
                         new
                         {
                             Id = "9653822c-0c90-403c-a105-b7370d3bb552",
-
                             ConcurrencyStamp = "efaff7d3-bfac-438d-9c9c-a9b6c31a48d6",
-
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "48aeb3ab-2f3d-4a53-9105-d16079980f3e",
-
                             ConcurrencyStamp = "6077c1a0-9488-44a1-b852-806be11229a9",
-
                             Name = "CondiminioMember",
                             NormalizedName = "CONDIMINIOMEMBER"
                         },
                         new
                         {
                             Id = "9e4c5362-0859-4ceb-bdfa-fb56b7aef532",
-
                             ConcurrencyStamp = "513a1b49-8ce6-48de-b3be-0a1cb385f61e",
-
                             Name = "Resident",
                             NormalizedName = "RESIDENT"
                         });
