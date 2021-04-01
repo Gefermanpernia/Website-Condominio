@@ -9,7 +9,6 @@ using Backend_Condominio.DTOs.Invoice;
 
 using Backend_Condominio.Entities;
 using Backend_Condominio.DTOs.Payment;
-using System.Linq;
 using Backend_Condominio.DTOs.User;
 
 namespace Backend_Condominio.Utilities
@@ -73,6 +72,7 @@ namespace Backend_Condominio.Utilities
                 .ForMember(m => m.NotificationTypeName, options => options.MapFrom(n => n.NotificationType.Name))
                 .ReverseMap();
 
+
             // =========================================================
             //                     User
             // ========================================================= 
@@ -83,6 +83,12 @@ namespace Backend_Condominio.Utilities
             CreateMap<ResidenceData, ResidenceDataDTO>()
                 .ReverseMap();
 
+            CreateMap<ResidenceDataCreationDTO, ResidenceData>()
+                .ReverseMap();
+
+            CreateMap<UpdateDataDTO, User>()
+                .ForMember(x => x.ResidenceDatas,options => options.Ignore());
+
 
             // =========================================================
             //                      Payment
@@ -91,6 +97,7 @@ namespace Backend_Condominio.Utilities
             CreateMap<Payment, PaymentDTO>()
                 .ForMember(x => x.TypePaymentName, options => options.MapFrom(e => e.TypePayment.Name))
                 .ReverseMap();
+
 
         }
     }
