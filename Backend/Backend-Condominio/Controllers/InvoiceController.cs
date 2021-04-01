@@ -37,8 +37,8 @@ namespace Backend_Condominio.Controllers
             return mapper.Map<List<InvoiceDTO>>(invoices);
 
         }
-
-        private InvoiceIncludeFilters IncludeAll => new ()
+       
+        private static InvoiceIncludeFilters IncludeAll => new ()
         {
             IncludeActivity =true,
             IncludeTypePayments =true,
@@ -74,6 +74,22 @@ namespace Backend_Condominio.Controllers
             return new CreatedAtActionResult(nameof(GetInvoice), "Invoice", new { id = invoice.UserId, invoice.ActivityId }, dto);
 
         }
+
+        [HttpPost("rol")]
+        public async Task<ActionResult<List<InvoiceDTO>>> PostRol(InvoiceCreationRoleDTO invoiceCreationRoleDTO)
+        {
+            var invoice = await invoiceRepository.CreateInvoiceForRol(invoiceCreationRoleDTO);
+
+            if (invoice == null)
+            {
+                return BadRequest();
+            }
+
+            var dto = mapper.Map<InvoiceDTO>(invoice);
+
+            return new CreatedAtActionResult(nameof(GetInvoicesPaginated), "Invoices", new { id = invoice[1].ActivityId }, dto);
+        }
+
 
         [HttpDelete]
 

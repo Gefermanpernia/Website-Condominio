@@ -4,8 +4,10 @@ namespace Backend_Condominio.Entities
 {
     public class Invoice
     {
+        public int Id { get; set; }
         public string UserId { get; set; }
 
+        public string RoleName { get; set; }
         public User User { get; set; }
 
         public int ActivityId { get; set; }

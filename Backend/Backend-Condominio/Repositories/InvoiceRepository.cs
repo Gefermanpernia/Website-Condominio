@@ -86,12 +86,12 @@ namespace Backend_Condominio.Repositories
                 return null;
             }
         }
-        public async Task<bool> CreateInvoiceForRol(InvoiceCreationRoleDTO invoice)
+        public async Task<List<Invoice>> CreateInvoiceForRol(InvoiceCreationRoleDTO invoice)
         {
             var roleExist = await dbContext.Roles.AnyAsync(x => x.NormalizedName == invoice.RoleName);
             if (!roleExist)
             {
-                return false;
+                return null;
             }
             var usersInRole = await userManager.GetUsersInRoleAsync(invoice.RoleName);
      
@@ -106,11 +106,11 @@ namespace Backend_Condominio.Repositories
 
                 await dbContext.SaveChangesAsync();
 
-                return true;
+                return invoices;
             }
             catch (DbUpdateException)
             {
-                return false;
+                return null;
             }
         }
         public async Task<bool> UpdateInvoice(InvoiceFilter invoiceFilter, InvoiceCreationDTO invoiceCreationDTO)

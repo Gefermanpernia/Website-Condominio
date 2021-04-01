@@ -25,28 +25,33 @@ namespace Backend_Condominio
             {
                 Id = ApplicationConstants.Roles.AdminRoleId,
                 Name=ApplicationConstants.Roles.AdminRoleName,
-                NormalizedName=ApplicationConstants.Roles.AdminRoleName
+                NormalizedName=ApplicationConstants.Roles.AdminRoleName.ToUpper()
             });
 
             builder.Entity<IdentityRole>().HasData(new IdentityRole
             {
                 Id = ApplicationConstants.Roles.CondominioMemberId,
                 Name = ApplicationConstants.Roles.CondominioMemberName,
-                NormalizedName = ApplicationConstants.Roles.CondominioMemberName
+                NormalizedName = ApplicationConstants.Roles.CondominioMemberName.ToUpper()
             });
 
             builder.Entity<IdentityRole>().HasData(new IdentityRole
             {
                 Id = ApplicationConstants.Roles.ResidentId,
                 Name = ApplicationConstants.Roles.ResidentName,
-                NormalizedName = ApplicationConstants.Roles.ResidentName
+                NormalizedName = ApplicationConstants.Roles.ResidentName.ToUpper()
             });
 
 
             //-----------------End default data---------------------------------
             //------------------Entities configuration----------------------
 
-            builder.Entity<Invoice>().HasKey(x => new { x.UserId, x.ActivityId });
+            builder.Entity<Invoice>().HasKey(x => x.Id);
+            builder.Entity<Invoice>()
+                .HasOne(i => i.User)
+                .WithMany(i => i.Invoices)
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<Notification>().HasKey(x => x.Id);
             builder.Entity<Notification>()
                 .HasOne(n => n.NotificationType)
