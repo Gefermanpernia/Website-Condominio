@@ -14,7 +14,7 @@ namespace Backend_Condominio.DTOs.Invoice
         public double Price { get; set; }
         [Required]
         public bool IsPaid { get; set; }
-        public List<Payment> Payments { get; set; }
+        public List<Entities.Payment> Payments { get; set; }
 
     }
 }

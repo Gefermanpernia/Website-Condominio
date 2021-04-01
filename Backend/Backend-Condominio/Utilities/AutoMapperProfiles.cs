@@ -8,6 +8,8 @@ using Backend_Condominio.DTOs.Activities;
 using Backend_Condominio.DTOs.Invoice;
 
 using Backend_Condominio.Entities;
+using Backend_Condominio.DTOs.Payment;
+using Backend_Condominio.DTOs.User;
 
 namespace Backend_Condominio.Utilities
 {
@@ -64,8 +66,7 @@ namespace Backend_Condominio.Utilities
             CreateMap<Notification, NotificationDTO>()
                 .ForMember(m => m.NotificationTypeName, options => options.MapFrom(n => n.NotificationType.Name))
                 .ReverseMap();
-<<<<<<< Updated upstream
-=======
+
 
             // =========================================================
             //                     User
@@ -92,7 +93,7 @@ namespace Backend_Condominio.Utilities
                 .ForMember(x => x.TypePaymentName, options => options.MapFrom(e => e.TypePayment.Name))
                 .ReverseMap();
 
->>>>>>> Stashed changes
+
         }
     }
 }

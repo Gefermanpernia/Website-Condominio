@@ -1,13 +1,8 @@
-<<<<<<< Updated upstream
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-=======
+
 ﻿using Backend_Condominio.Utilities;
 
 using System.ComponentModel.DataAnnotations;
->>>>>>> Stashed changes
+
 
 namespace Backend_Condominio.Entities
 {

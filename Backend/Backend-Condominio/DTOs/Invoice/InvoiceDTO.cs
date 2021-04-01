@@ -10,7 +10,7 @@ namespace Backend_Condominio.DTOs.Invoice
     {
         public string UserId { get; set; }
 
-        public User User { get; set; }
+        public Entities.User User { get; set; }
 
         public int ActivityId { get; set; }
 
@@ -20,6 +20,6 @@ namespace Backend_Condominio.DTOs.Invoice
 
         public bool IsPaid { get; set; }
 
-        public List<Payment> Payments { get; set; }
+        public List<Entities.Payment> Payments { get; set; }
     }
 }
