@@ -1,8 +1,9 @@
-﻿using Backend_Condominio.Entities;
-using System;
+﻿using Backend_Condominio.DTOs.Activities;
+using Backend_Condominio.DTOs.Payment;
+using Backend_Condominio.DTOs.User;
+using Backend_Condominio.Entities;
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Backend_Condominio.DTOs.Invoice
 {
@@ -10,16 +11,16 @@ namespace Backend_Condominio.DTOs.Invoice
     {
         public string UserId { get; set; }
 
-        public User User { get; set; }
+        public UserDTO User { get; set; }
 
         public int ActivityId { get; set; }
 
-        public Activity Activity { get; set; }
+        public ActivityDTO Activity { get; set; }
 
         public double Price { get; set; }
 
         public bool IsPaid { get; set; }
 
-        public List<Payment> Payments { get; set; }
+        public List<PaymentDTO> Payments { get; set; }
     }
 }

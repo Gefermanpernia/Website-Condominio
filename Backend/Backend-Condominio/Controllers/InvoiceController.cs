@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+
+using Backend_Condominio.DTOs.Filters;
 using Backend_Condominio.DTOs.Invoice;
 using Backend_Condominio.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -23,30 +25,31 @@ namespace Backend_Condominio.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<InvoiceDTO>> GetInvoices()
+        [HttpGet("paginate")]
+        public async Task<ActionResult<List<InvoiceDTO>>> GetInvoicesPaginated([FromQuery] InvoiceFilter invoiceFilter)
         {
-            var invoice = await invoiceRepository.GetInvoices();
-            return mapper.Map<InvoiceDTO>(invoice);
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<InvoiceDTO>> GetInvoicesPaginated([FromQuery] InvoiceFilter invoiceFilter)
-        {
-            var invoices = await invoiceRepository.GetInvoicesPaginated(invoiceFilter);
+            var invoices = await invoiceRepository.GetInvoicesPaginated(invoiceFilter,IncludeAll);
             if (invoices == null)
             {
                 return NotFound();
             }
 
-            return mapper.Map<InvoiceDTO>(invoices);
+            return mapper.Map<List<InvoiceDTO>>(invoices);
 
         }
 
-        [HttpGet("{id}/{id}")]
-        public async Task<ActionResult<InvoiceDTO>> GetInvoice([FromQuery] InvoiceFilter invoiceFilter)
+        private InvoiceIncludeFilters IncludeAll => new ()
         {
-            var invoice = await invoiceRepository.GetInvoicesPaginated(invoiceFilter);
+            IncludeActivity =true,
+            IncludeTypePayments =true,
+            IncludePayments =true,
+            IncludeUser =true
+        };
+
+        [HttpGet("{activityId}/{userId}")]
+        public async Task<ActionResult<InvoiceDTO>> GetInvoice(int activityId , string userId)
+        {
+            var invoice = await invoiceRepository.GetInvoice(userId, activityId, IncludeAll);
             if (invoice == null)
             {
                 return NotFound();
@@ -56,8 +59,8 @@ namespace Backend_Condominio.Controllers
 
         }
 
-        [HttpPost("{id}/user")]
-        public async Task<ActionResult> PostUser(InvoiceCreationDTO invoiceCreationDTO)
+        [HttpPost]
+        public async Task<ActionResult> PostUser( InvoiceCreationDTO invoiceCreationDTO)
         {
             var invoice = await invoiceRepository.CreateInvoiceForUser(invoiceCreationDTO);
 
@@ -72,7 +75,7 @@ namespace Backend_Condominio.Controllers
 
         }
 
-        [HttpPost]
+        [HttpDelete]
 
         public async Task<ActionResult> DeleteInvoice(
             InvoiceFilter invoiceFilter)
