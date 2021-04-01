@@ -8,6 +8,9 @@ using Backend_Condominio.DTOs.Activities;
 using Backend_Condominio.DTOs.Invoice;
 
 using Backend_Condominio.Entities;
+using Backend_Condominio.DTOs.Payment;
+using System.Linq;
+using Backend_Condominio.DTOs.User;
 
 namespace Backend_Condominio.Utilities
 {
@@ -48,7 +51,11 @@ namespace Backend_Condominio.Utilities
             //                      Invoice
             // ========================================================= 
             CreateMap<InvoiceCreationDTO, Invoice>().ReverseMap();
-            CreateMap<Invoice, InvoiceDTO>().ReverseMap();
+            CreateMap<Invoice, InvoiceDTO>()
+                .ReverseMap();
+            CreateMap<InvoiceCreationRoleDTO, Invoice>();
+             
+
             // =========================================================
             //                      Commentary
             // =========================================================
@@ -58,12 +65,33 @@ namespace Backend_Condominio.Utilities
             //                      Notifications
             // ========================================================= 
 
+
             CreateMap<NotificationCreationDTO, Notification>();
             CreateMap<NotificationForGroupDTO, Notification>();
 
             CreateMap<Notification, NotificationDTO>()
                 .ForMember(m => m.NotificationTypeName, options => options.MapFrom(n => n.NotificationType.Name))
                 .ReverseMap();
+
+            // =========================================================
+            //                     User
+            // ========================================================= 
+
+            CreateMap<User, UserDTO>()
+                .ReverseMap();
+
+            CreateMap<ResidenceData, ResidenceDataDTO>()
+                .ReverseMap();
+
+
+            // =========================================================
+            //                      Payment
+            // ========================================================= 
+
+            CreateMap<Payment, PaymentDTO>()
+                .ForMember(x => x.TypePaymentName, options => options.MapFrom(e => e.TypePayment.Name))
+                .ReverseMap();
+
         }
     }
 }
