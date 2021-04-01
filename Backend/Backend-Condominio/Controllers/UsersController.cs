@@ -53,7 +53,7 @@ namespace Backend_Condominio.Controllers
         [HttpPost("profile")]
         public async Task<ActionResult> UpdateData(UpdateDataDTO updateDataDTO)
         {
-            var result =await userRepository.UpdateProfile(updateDataDTO);
+            var result = await userRepository.UpdateProfile(updateDataDTO);
             if (result)
             {
                 return NoContent();
@@ -61,7 +61,50 @@ namespace Backend_Condominio.Controllers
 
             return BadRequest();
         }
+        [HttpDelete("{UserId}/{roleName}")]
+        public async Task<ActionResult> DeleteRol([FromRoute] string UserId, string roleName)
+        {
+            var user = await userManager.FindByIdAsync(UserId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var result = await userManager.RemoveFromRoleAsync(user, roleName);
+            if (result.Succeeded)
+            {
+                return NoContent();
+            }
+            return BadRequest(result.Errors);
+        }
 
+        [HttpGet("profile/{UserId}")]
+        public async Task<ActionResult<UserDTO>> GetUser([FromRoute] string UserId)
+        {
 
+            var user = await userRepository.GetUser(UserId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return user;
+        }
+        [HttpPost("profile/{UserId}")]
+        public async Task<ActionResult> ChangePassword([FromRoute] string UserId, UserPasswordDTO userPasswordDTO)
+        {
+
+            var user = await userManager.FindByIdAsync(UserId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var result = await userManager.ChangePasswordAsync(user, userPasswordDTO.CurrentPassword, userPasswordDTO.NewPassword);
+            if (result.Succeeded)
+            {
+                return NoContent();
+            }
+            return BadRequest(result.Errors);
+        }
     }
 }
+

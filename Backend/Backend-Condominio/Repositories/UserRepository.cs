@@ -54,5 +54,16 @@ namespace Backend_Condominio.Repositories
 
             return true;
         }
+        public async Task<UserDTO> GetUser(string UserId)
+        {
+            var user = await applicationDbContext.Users.Include(x => x.ResidenceDatas).FirstOrDefaultAsync(u => u.Id == UserId);
+            if (user == null) { return null; }
+
+            var entity = mapper.Map<UserDTO>(user);
+            return entity;
+
+        }
+
+
     }
 }
