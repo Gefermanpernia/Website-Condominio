@@ -85,9 +85,9 @@ namespace Backend_Condominio.Controllers
                 return BadRequest();
             }
 
-            var dto = mapper.Map<InvoiceDTO>(invoice);
+            var dto = mapper.Map<List<InvoiceDTO>>(invoice);
 
-            return new CreatedAtActionResult(nameof(GetInvoicesPaginated), "Invoices", new { id = invoice[1].ActivityId }, dto);
+            return dto;
         }
 
 
