@@ -4,14 +4,16 @@ using Backend_Condominio;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Backend_Condominio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210325230830_default-roles")]
+    partial class defaultroles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,34 +113,18 @@ namespace Backend_Condominio.Migrations
 
             modelBuilder.Entity("Backend_Condominio.Entities.Notification", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("AlreadySeen")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(1200)
-                        .HasColumnType("nvarchar(1200)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("NotificationTypeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "NotificationTypeId");
 
                     b.HasIndex("NotificationTypeId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Notifications");
                 });
@@ -365,21 +351,21 @@ namespace Backend_Condominio.Migrations
                         new
                         {
                             Id = "9653822c-0c90-403c-a105-b7370d3bb552",
-                            ConcurrencyStamp = "ae9156cf-d689-48d8-8fdc-1437fe4f438f",
+                            ConcurrencyStamp = "bc117c1d-aa11-4297-bca8-9bd12b8fd476",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "48aeb3ab-2f3d-4a53-9105-d16079980f3e",
-                            ConcurrencyStamp = "212abb58-a37a-4c1e-9867-9a996c0c8cda",
+                            ConcurrencyStamp = "9bf53508-8a7f-428b-a9fb-c436cd6d31a5",
                             Name = "CondiminioMember",
                             NormalizedName = "CondiminioMember"
                         },
                         new
                         {
                             Id = "9e4c5362-0859-4ceb-bdfa-fb56b7aef532",
-                            ConcurrencyStamp = "e0ed9081-ddf5-4a3a-9377-0245fa578a34",
+                            ConcurrencyStamp = "79e3eeeb-7734-4b6c-9dfd-b7d3a5841977",
                             Name = "Resident",
                             NormalizedName = "Resident"
                         });
