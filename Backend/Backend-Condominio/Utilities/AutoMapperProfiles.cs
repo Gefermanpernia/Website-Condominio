@@ -64,6 +64,35 @@ namespace Backend_Condominio.Utilities
             CreateMap<Notification, NotificationDTO>()
                 .ForMember(m => m.NotificationTypeName, options => options.MapFrom(n => n.NotificationType.Name))
                 .ReverseMap();
+<<<<<<< Updated upstream
+=======
+
+            // =========================================================
+            //                     User
+            // ========================================================= 
+
+            CreateMap<User, UserDTO>()
+                .ReverseMap();
+
+            CreateMap<ResidenceData, ResidenceDataDTO>()
+                .ReverseMap();
+
+            CreateMap<ResidenceDataCreationDTO, ResidenceData>()
+                .ReverseMap();
+
+            CreateMap<UpdateDataDTO, User>()
+                .ForMember(x => x.ResidenceDatas,options => options.Ignore());
+
+
+            // =========================================================
+            //                      Payment
+            // ========================================================= 
+
+            CreateMap<Payment, PaymentDTO>()
+                .ForMember(x => x.TypePaymentName, options => options.MapFrom(e => e.TypePayment.Name))
+                .ReverseMap();
+
+>>>>>>> Stashed changes
         }
     }
 }

@@ -46,7 +46,21 @@ namespace Backend_Condominio
             //-----------------End default data---------------------------------
             //------------------Entities configuration----------------------
 
+<<<<<<< Updated upstream
             builder.Entity<Invoice>().HasKey(x => new { x.UserId, x.ActivityId });
+=======
+            builder.Entity<ResidenceData>()
+                .HasKey(x => new { x.Floor , x.ApartmentNumber});
+
+            
+
+            builder.Entity<Invoice>().HasKey(x => x.Id);
+            builder.Entity<Invoice>()
+                .HasOne(i => i.User)
+                .WithMany(i => i.Invoices)
+                .OnDelete(DeleteBehavior.Cascade);
+
+>>>>>>> Stashed changes
             builder.Entity<Notification>().HasKey(x => x.Id);
             builder.Entity<Notification>()
                 .HasOne(n => n.NotificationType)

@@ -12,5 +12,8 @@
             public const string ResidentName = "Resident";
             public const string ResidentId = "9e4c5362-0859-4ceb-bdfa-fb56b7aef532";
         }
+
+        public const int NumberOfFloors = 21;
+        public const int NumberOfApartment = 8;
     }
 }
