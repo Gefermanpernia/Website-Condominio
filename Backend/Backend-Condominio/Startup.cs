@@ -71,7 +71,7 @@ namespace Backend_Condominio
             services.AddScoped<ActivityRepository>();
 
             services.AddScoped<NotificationRepository>();
-
+            services.AddScoped<UserRepository>();
             services.AddScoped<InvoiceRepository>();
 
 
