@@ -1,3 +1,5 @@
+using Backend_Condominio.Utilities;
+
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +20,15 @@ namespace Backend_Condominio
             {
                 dbContext.Database.Migrate();
             }
+
+            //var emailSender = scope.ServiceProvider.GetRequiredService<IMailSender>();
+            //emailSender.Send(new DTOs.Mail.MailRequest
+            //{
+            //    Body = "Manoooooooooooooooooo!!!",
+            //    Destination= "gefermanp@gmail.com",
+            //    Title="Email Prueba"
+            //});
+
 
             webHost.Run();
         }
