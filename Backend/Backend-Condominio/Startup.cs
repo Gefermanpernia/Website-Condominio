@@ -1,5 +1,9 @@
 using Backend_Condominio.Entities;
 using Backend_Condominio.Repositories;
+using Backend_Condominio.Settings;
+using Backend_Condominio.Utilities;
+
+using MailKit;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -86,6 +90,9 @@ namespace Backend_Condominio
 
             services
                 .AddCors(options => options.AddPolicy("DevelopmentPolicy", policyBuilder.Build()));
+
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            services.AddSingleton<IMailSender, MailSenderUsingGmailSMTP>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
