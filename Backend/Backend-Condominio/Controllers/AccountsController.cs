@@ -1,7 +1,8 @@
 ﻿
 using Backend_Condominio.DTOs.Auth;
+using Backend_Condominio.DTOs.Mail;
 using Backend_Condominio.Entities;
-
+using Backend_Condominio.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +14,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Backend_Condominio.Controllers
 {
@@ -20,17 +22,20 @@ namespace Backend_Condominio.Controllers
     [Route("api/accounts")]
     public class AccountsController : ControllerBase
     {
-        private readonly SignInManager<User> signInManager;
-        private readonly UserManager<User> userManager;
-        private readonly IConfiguration configuration;
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly IConfiguration _configuration;
+
+        private readonly IMailSender _mailSender;
 
         public AccountsController(SignInManager<User> signInManager,
             UserManager<User> userManager,
-            IConfiguration configuration)
+            IConfiguration configuration, IMailSender mailSender)
         {
-            this.signInManager = signInManager;
-            this.userManager = userManager;
-            this.configuration = configuration;
+            this._signInManager = signInManager;
+            this._userManager = userManager;
+            this._configuration = configuration;
+            _mailSender = mailSender;
         }
         [HttpPost("register")]
         public async Task<ActionResult<TokenResponse>> Register(RegisterDTO registerDTO)
@@ -42,7 +47,7 @@ namespace Backend_Condominio.Controllers
                 FullName = registerDTO.FullName
             };
 
-            var result = await userManager.CreateAsync(user, registerDTO.Password);
+            var result = await _userManager.CreateAsync(user, registerDTO.Password);
             if (result.Succeeded)
             {
                 return await BuildLoginToken(user);
@@ -65,14 +70,14 @@ namespace Backend_Condominio.Controllers
                 new Claim(ClaimTypes.NameIdentifier,user.Id)
             };
 
-            var roles = await userManager.GetRolesAsync(user);
+            var roles = await _userManager.GetRolesAsync(user);
 
             for (int i = 0; i < roles.Count; i++)
             {
                 claims.Add(new Claim(ClaimTypes.Role, roles[i]));
             }
 
-            var sigInkey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["auth:key"]));
+            var sigInkey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["auth:key"]));
 
             var creds = new SigningCredentials(sigInkey, SecurityAlgorithms.HmacSha256);
 
@@ -95,10 +100,10 @@ namespace Backend_Condominio.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<TokenResponse>> Login(LoginDTO loginDTO)
         {
-            var user = await userManager.FindByEmailAsync(loginDTO.Email);
+            var user = await _userManager.FindByEmailAsync(loginDTO.Email);
             if (user != null)
             {
-                var result = await signInManager.PasswordSignInAsync(user, loginDTO.Password, false, true);
+                var result = await _signInManager.PasswordSignInAsync(user, loginDTO.Password, false, true);
                 if (result.Succeeded)
                 {
                     return await BuildLoginToken(user);
@@ -114,5 +119,52 @@ namespace Backend_Condominio.Controllers
             }
             return BadRequest("Credenciales invalidas");
         }
+
+        [HttpPost("reset-password")]
+        public async Task<ActionResult> ResetPassword(EmailDTO emailDTO)
+        {
+            var user = await _userManager.FindByEmailAsync(emailDTO.Email);
+
+            if (user != null)
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var id = user.Id;
+
+                var url = $"http://localhost:4200/reset-password?token={ HttpUtility.UrlEncode(token)}&id={HttpUtility.UrlEncode(id)}";
+
+                await _mailSender.Send(
+                    new MailRequest
+                    {
+                        Title = "Reset password",
+                        Body = $"para cambiar tu password {url}",
+                        Destination = emailDTO.Email
+                    });
+            }
+            return NoContent();
+        }
+
+        [HttpPost("confirmed-password")]
+        public async Task<ActionResult> ConfirmedPassword(ConfirmedUserPasswordDTO confirmedUserPasswordDTO)
+        {
+            var user = await _userManager.FindByIdAsync(confirmedUserPasswordDTO.UserId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var token = HttpUtility.UrlDecode(confirmedUserPasswordDTO.Token);
+
+            var result = await _userManager.ResetPasswordAsync(user, token, confirmedUserPasswordDTO.Password);
+            if (result.Succeeded)
+            {
+                return NoContent();
+            }
+            return BadRequest();
+        }
     }
 }
+
+    
+    
+
+
