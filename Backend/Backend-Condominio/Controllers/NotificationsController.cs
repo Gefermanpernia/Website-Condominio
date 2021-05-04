@@ -3,7 +3,7 @@
 using Backend_Condominio.DTOs.Filters;
 using Backend_Condominio.DTOs.Notification;
 using Backend_Condominio.Repositories;
-
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
 using System.Threading.Tasks;
@@ -25,12 +25,12 @@ namespace Backend_Condominio.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<NotificationDTO>> GetNotifications([FromQuery] NotificationFilter notificationFilter)
+        public async Task<ActionResult<List<NotificationDTO>>> GetNotifications([FromQuery] NotificationFilter notificationFilter)
         {
             var notifications = await notificationRepository.GetNotifications(notificationFilter,
                 IncludeType:true);
 
-            return mapper.Map<NotificationDTO>(notifications);
+            return mapper.Map<List<NotificationDTO>>(notifications);
 
 
         }
