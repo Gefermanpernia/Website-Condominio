@@ -18,6 +18,13 @@ const routes: Routes = [
           import('./profile/profile.module').then((m) => m.ProfileModule),
       },
       {
+        path: 'activities',
+        loadChildren: () =>
+          import('./components/activity/activity.module').then(
+            (m) => m.ActivityModule
+          ),
+      },
+      {
         path: '',
         redirectTo: 'main',
         pathMatch: 'full',

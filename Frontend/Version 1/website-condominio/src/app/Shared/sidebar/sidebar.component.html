@@ -1,11 +1,26 @@
-<mat-drawer-container class="container-sidenav" autosize>
-  <mat-drawer #drawer class="sidenav" mode="side">
-    <p>Auto-resizing sidenav</p>
+<mat-drawer-container class="container-sidenav"  autosize>
+  <mat-drawer #drawer class="sidenav" role="region" [opened]="true" mode="side">
+    <mat-toolbar color="warn">
+      <span>FirstRow</span>
+    </mat-toolbar>
+    <mat-divider>
+    </mat-divider>
+    <mat-list>
+      <mat-list-item>item</mat-list-item>
+      <mat-divider>
+      </mat-divider>
+      <mat-list-item>item
+      </mat-list-item>
+      <mat-divider [title]="'asd'"></mat-divider>
+      <mat-selection-list>
+        <mat-list-item>as</mat-list-item>
+      </mat-selection-list>
+    </mat-list>
   </mat-drawer>
 
-  <div class="container-main">
-    <div class="sidenav-button">
-      <button type="button" color="primary" mat-raised-button (click)="drawer.toggle()">
+  <mat-drawer-content class="container-main"  role="main">
+      <div class="sidenav-button">
+        <button type="button" color="primary" mat-raised-button (click)="drawer.toggle()">
         Toggle sidenav
       </button>
     </div>
@@ -19,7 +34,7 @@
 
       </ng-content>
     </div>
-  </div>
+</mat-drawer-content>
 
 
 
