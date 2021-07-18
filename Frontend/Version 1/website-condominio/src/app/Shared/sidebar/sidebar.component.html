@@ -1,0 +1,27 @@
+<mat-drawer-container class="container-sidenav" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <p>Auto-resizing sidenav</p>
+  </mat-drawer>
+
+  <div class="container-main">
+    <div class="sidenav-button">
+      <button type="button" color="primary" mat-raised-button (click)="drawer.toggle()">
+        Toggle sidenav
+      </button>
+    </div>
+    <div>
+      <ng-content select="[contents]">
+
+      </ng-content>
+    </div>
+    <div>
+      <ng-content select="[footer]">
+
+      </ng-content>
+    </div>
+  </div>
+
+
+
+
+</mat-drawer-container>

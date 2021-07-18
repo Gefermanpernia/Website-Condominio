@@ -21,6 +21,11 @@ const routes: Routes = [
         path:'register'
       },
       {
+        path:'',
+        pathMatch:'full',
+        redirectTo:'auth/login'
+      },
+      {
         path:'**',
         pathMatch:'full',
         redirectTo:'auth/login'
