@@ -10,11 +10,16 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./Backend
+    
     steps:
+    
     - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
+      
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
