@@ -113,9 +113,10 @@ export class ServicesCondominioComponent implements OnInit, OnDestroy {
     }
   }
 
-  cancelCreation() {
+  cancelCreation(item?:ServicesTDTO) {
     this.serviceForm.reset();
-    this.isEditing = false;
+    if(item)
+    item.isEditing = false;
   }
   isEditing: boolean = false;
 
