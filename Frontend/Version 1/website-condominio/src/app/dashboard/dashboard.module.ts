@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { ToolbarModule } from '../Shared/toolbar/toolbar.module';
+import { ToolbarModule } from '../Shared/toolbarN/toolbar.module';
 import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
 import { SidebarModule } from '../Shared/sidebar/sidebar.module';
 

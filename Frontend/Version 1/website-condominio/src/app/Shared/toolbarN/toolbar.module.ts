@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { ToolbarMenuComponent } from './toolbar-menu.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { ToolbarMenuComponent } from './toolbar-menu.component';
     CommonModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule, MatMenuModule
   ],
   exports:[
     ToolbarMenuComponent

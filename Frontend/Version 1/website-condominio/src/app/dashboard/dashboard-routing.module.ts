@@ -18,6 +18,13 @@ const routes: Routes = [
           import('./profile/profile.module').then((m) => m.ProfileModule),
       },
       {
+        path: 'services',
+        loadChildren: () =>
+          import(
+            './components/services-condominio/services-condominio.module'
+          ).then((m) => m.ServicesCondominioModule),
+      },
+      {
         path: '',
         redirectTo: 'main',
         pathMatch: 'full',
