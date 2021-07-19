@@ -18,11 +18,11 @@ const routes: Routes = [
           import('./profile/profile.module').then((m) => m.ProfileModule),
       },
       {
-        path: 'activities',
+        path: 'services',
         loadChildren: () =>
-          import('./components/activity/activity.module').then(
-            (m) => m.ActivityModule
-          ),
+          import(
+            './components/services-condominio/services-condominio.module'
+          ).then((m) => m.ServicesCondominioModule),
       },
       {
         path: '',

@@ -1,0 +1,72 @@
+<div class="container">
+
+  <form (ngSubmit)="createOrUpdate()" [formGroup]="serviceForm">
+
+    <div class="row">
+      <div class="col-md-6 field">
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="Crea un servicio" formControlName="name">
+          <mat-error>El nombre es requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 field">
+        <mat-form-field appearance="fill">
+          <mat-label>Estado del servicio</mat-label>
+          <mat-select placeholder="Seleccione el estatus" formControlName="serviceStatusId">
+            <mat-option *ngFor="let item of serviceStatusDTO" [value]="item.id">
+              {{item.title}}
+            </mat-option>
+          </mat-select>
+
+        </mat-form-field>
+      </div>
+    </div>
+    <button mat-button type="submit" color="primary">Agregar</button>
+    <button mat-button (click)="cancelCreation()">Cancelar</button>
+  </form>
+</div>
+
+<div class="container-main">
+
+  <div *ngFor="let item of servicesDTO; let index = index">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title> {{item.name}} </mat-card-title>
+      </mat-card-header>
+      <ng-container *ngIf="!item.isEditing; else elseTemplate">
+        <mat-card-content>
+
+
+
+          <p>
+            {{item.serviceStatus.title}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="item.isEditing = true">Editar</button>
+          <button mat-button (click)="deleteSer(item.id)">Eliminar</button>
+        </mat-card-actions>
+      </ng-container>
+
+      <ng-template #elseTemplate>
+        <mat-card-content>
+
+
+
+          <p>
+            <mat-select placeholder="Seleccione el estado del servicio" [(ngModel)]="statusId" name="item">
+              <mat-option *ngFor="let item of serviceStatusDTO" [value]="item.id">
+                {{item.title}}
+              </mat-option>
+            </mat-select>
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="createOrUpdate(true, statusId,item)">Guardar</button>
+          <button mat-button (click)="cancelCreation()">Cancelar</button>
+        </mat-card-actions>
+      </ng-template>
+    </mat-card>
+  </div>
+
+</div>
