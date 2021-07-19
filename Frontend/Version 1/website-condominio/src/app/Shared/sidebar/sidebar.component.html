@@ -1,38 +1,43 @@
 <mat-drawer-container class="container-sidenav"  autosize>
   <mat-drawer #drawer class="sidenav" role="region" [opened]="true" mode="side">
     <mat-toolbar color="warn">
-      <span>FirstRow</span>
+      <span>Crea tus Servicios aquí</span>
     </mat-toolbar>
     <mat-divider>
     </mat-divider>
-    <mat-list>
-      <mat-list-item>item</mat-list-item>
-      <mat-divider>
-      </mat-divider>
-      <mat-list-item>item
-      </mat-list-item>
-      <mat-divider [title]="'asd'"></mat-divider>
-      <mat-selection-list>
-        <mat-list-item>as</mat-list-item>
-      </mat-selection-list>
-    </mat-list>
+
   </mat-drawer>
 
   <mat-drawer-content class="container-main"  role="main">
       <div class="sidenav-button">
         <button type="button" color="primary" mat-raised-button (click)="drawer.toggle()">
-        Toggle sidenav
+        Abrir Menu
       </button>
     </div>
-    <div>
+    <div class="mb-3">
       <ng-content select="[contents]">
 
       </ng-content>
     </div>
-    <div>
+
+    <div color="primary" class="footer">
       <ng-content select="[footer]">
 
       </ng-content>
+      <footer class="flex-row justify-content-between" style="background-color: #3f51b5;">
+        <div>
+
+          <span>Residencia Kapadare</span>
+        </div>
+        <div>
+
+          <span>Servicio Comunitario</span>
+        </div>
+        <div>
+
+          <span>Geferman Pernia </span>
+        </div>
+      </footer>
     </div>
 </mat-drawer-content>
 
