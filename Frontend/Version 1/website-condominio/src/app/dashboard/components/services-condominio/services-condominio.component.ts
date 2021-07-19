@@ -37,7 +37,11 @@ export class ServicesCondominioComponent implements OnInit, OnDestroy {
     if (this.serviceTimeout) {
       clearTimeout(this.serviceTimeout);
     }
+    if (this.serviceStatusTimeout) {
+      clearTimeout(this.serviceStatusTimeout);
+    }
     this.serviceSusbcrition?.unsubscribe();
+    this.serviceStatusSubscription?.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -88,12 +92,8 @@ export class ServicesCondominioComponent implements OnInit, OnDestroy {
       this._statusId = value;
     }
   }
-  isCreating:boolean = false
+  isCreating: boolean = false;
   createOrUpdate(isUpdate = false, id?: number, model?: ServicesTDTO) {
-    if (!this.serviceForm.valid || this.isCreating) {
-      return;
-    }
-
     this.isCreating = true;
     this.serviceCreationDTO = this.serviceForm.value;
 
@@ -105,18 +105,20 @@ export class ServicesCondominioComponent implements OnInit, OnDestroy {
           this.loadServices();
           model.isEditing = false;
         });
-    } else {
+    } else if (this.isCreating && !isUpdate) {
+      if (!this.serviceForm.valid) {
+        return;
+      }
       this.servicesTService.create(this.serviceCreationDTO).subscribe(() => {
         this.loadServices();
-        this.isCreating = false
+        this.isCreating = false;
       });
     }
   }
 
-  cancelCreation(item?:ServicesTDTO) {
+  cancelCreation(item?: ServicesTDTO) {
     this.serviceForm.reset();
-    if(item)
-    item.isEditing = false;
+    if (item) item.isEditing = false;
   }
   isEditing: boolean = false;
 

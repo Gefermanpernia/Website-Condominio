@@ -8,7 +8,7 @@ const routes: Routes = [
     component: DashboardLayoutComponent,
     children: [
       {
-        path: 'main',
+        path: 'services',
         loadChildren: () =>
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
@@ -18,7 +18,7 @@ const routes: Routes = [
           import('./profile/profile.module').then((m) => m.ProfileModule),
       },
       {
-        path: 'services',
+        path: 'main',
         loadChildren: () =>
           import(
             './components/services-condominio/services-condominio.module'
